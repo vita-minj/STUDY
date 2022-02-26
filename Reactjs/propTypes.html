@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    </head>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" ></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" ></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const Btn = ({text, fontSize = 16}) => { //fontSize를 따로 지정하지 않았다면 fontSize 의 기본값은 16이 됨
+            return (
+                <button 
+                    style={{
+                        backgroundColor:"skyblue",
+                        color:"black",
+                        padding:"10px 20px",
+                        border:"0",
+                        borderRadius:"10px",
+                        fontSize, //prop네임과 스타일 속성 네임이 같을 시 하나만 써도 됨 
+                    }}
+                >
+                    {text}
+                </button>
+            );
+        }
+        Btn.propTypes = { 
+            text: PropTypes.string.isRequired, //isRequired 는 필수적인 상황에 쓰임
+            fontSize: PropTypes.number,
+        };// prop패키지소스를 이용해서 propTypes사용 시 prop의 값을 원하는 형으로 지정해줄 수 있음 
+
+        const App = () => {
+            return (
+                <div>
+                    <Btn text="Save Changed" fontSize={18}/>
+                    <Btn text="Continue" />
+                </div>
+            ); 
+        }
+        const root = document.querySelector("#root");
+        ReactDOM.render(<App />, root);
+    </script>
+</html>

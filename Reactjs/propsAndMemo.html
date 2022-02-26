@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    </head>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" ></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const Btn = ({banana, changeValue}) => {
+            console.log(banana, "was changes")
+            return (
+                <button 
+                    onClick ={changeValue}
+                    style={{
+                        backgroundColor:"skyblue",
+                        color:"black",
+                        padding:"10px 20px",
+                        border:"0",
+                        borderRadius:"10px",
+                    }}
+                >
+                    {banana}
+                </button>
+            );
+        }
+        const MemorizedBtn = React.memo(Btn); //React.memo()활용 시 해당 부분을 기억해서 업데이트 되는 부분만 바뀜
+        const App = () => {
+            const [value, setValue] = React.useState("Save Changes");
+            const changeValue = () => {
+                setValue("changed");
+            }
+            return (
+                <div>
+                    <MemorizedBtn banana={value} changeValue={changeValue}/>
+                    <MemorizedBtn banana="Continue" />
+                </div>
+            ); 
+        }
+        const root = document.querySelector("#root");
+        ReactDOM.render(<App />, root);
+    </script>
+</html>
